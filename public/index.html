@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanda — Portfolio</title>
+    <meta name="description" content="Portfolio of I Wayan Trijata Ananda Putra — Full Stack Developer crafting code with purpose.">
+    <link href="/css/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-bg text-text font-sans antialiased overflow-x-hidden selection:bg-text selection:text-white">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- NAVBAR -->
+<!-- ═══════════════════════════════════════════ -->
+<nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-10 h-24 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-text text-white flex items-center justify-center font-display font-bold text-sm">N</div>
+            <span class="font-display font-bold text-xl text-text tracking-tight">Nanda</span>
+        </a>
+        <div class="hidden md:flex items-center gap-12">
+            <a href="#home" class="text-[11px] font-bold tracking-[0.2em] uppercase text-text hover:text-text-muted transition-colors">Home</a>
+            <a href="#about" class="text-[11px] font-bold tracking-[0.2em] uppercase text-text-muted hover:text-text transition-colors">About</a>
+            <a href="#projects" class="text-[11px] font-bold tracking-[0.2em] uppercase text-text-muted hover:text-text transition-colors">Project</a>
+            <a href="#contact" class="text-[11px] font-bold tracking-[0.2em] uppercase text-text-muted hover:text-text transition-colors">Contact</a>
+        </div>
+        <button class="md:hidden text-text" id="mobile-menu-btn"><i data-lucide="menu" class="w-6 h-6"></i></button>
+    </div>
+    <!-- Mobile Menu -->
+    <div class="md:hidden hidden bg-card border-t border-border shadow-xl" id="mobile-menu">
+        <div class="flex flex-col px-6 py-6 gap-6">
+            <a href="#home" class="text-xs font-bold uppercase tracking-[0.2em] text-text">Home</a>
+            <a href="#about" class="text-xs font-bold uppercase tracking-[0.2em] text-text-muted">About</a>
+            <a href="#projects" class="text-xs font-bold uppercase tracking-[0.2em] text-text-muted">Project</a>
+            <a href="#contact" class="text-xs font-bold uppercase tracking-[0.2em] text-text-muted">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- HERO SECTION -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Radial glow background (Silver centered) -->
+    <div class="absolute inset-0 -z-10 pointer-events-none flex items-center justify-center">
+        <div class="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-[radial-gradient(circle,rgba(220,220,220,0.4)_0%,rgba(243,243,243,0)_70%)] rounded-full"></div>
+    </div>
+
+    <!-- Left Sidebar: Social Icons (Simple line) -->
+    <aside class="hidden md:flex fixed left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-6 z-40">
+        <div class="w-[1px] h-20 bg-text/20"></div>
+        <a href="https://github.com/Nanzzyy" target="_blank" class="text-text-muted hover:text-text transition-all duration-300 hover:scale-110"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+        <a href="https://instagram.com/ananda.bgss" target="_blank" class="text-text-muted hover:text-text transition-all duration-300 hover:scale-110"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://tiktok.com/@nandaajaaa55" target="_blank" class="text-text-muted hover:text-text transition-all duration-300 hover:scale-110"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a8.15 8.15 0 0 1-1.87-1.42c-.01 3.65.01 7.3-.01 10.95-.1 3.32-2.58 6.43-5.83 7.15-3.23.72-6.84-.73-8.38-3.69-1.58-3.04-.61-7.14 2.23-9.06 1.4-.95 3.12-1.32 4.76-1.04v4.13c-1.3-.37-2.82-.12-3.83.74-.95.83-1.28 2.2-1.01 3.4.21 1.05.99 1.95 2.01 2.27 1.05.34 2.3.16 3.11-.6.76-.73 1.03-1.84.97-2.84l.01-15.01Z"/></svg></a>
+        <a href="https://linkedin.com/in/nnda-bgss" target="_blank" class="text-text-muted hover:text-text transition-all duration-300 hover:scale-110"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <div class="w-[1px] h-20 bg-text/20"></div>
+    </aside>
+
+    <!-- Hero Content (Centered) -->
+    <div class="max-w-[1200px] mx-auto px-6 md:px-10 text-center z-10">
+        <h1 class="text-[clamp(3.5rem,10vw,8rem)] font-black leading-[1.1] text-text mb-6 animate-fade-in-up tracking-tighter">
+            Hey, I'm Nanda
+        </h1>
+        <p class="text-base md:text-xl text-text-muted max-w-xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.1s;">
+            Crafting code with purpose. Designing dreams into reality.<br class="hidden md:block"> Welcome to the space where creativity meets precision.
+        </p>
+    </div>
+
+    <!-- Scroll Indicators -->
+    <!-- Center: Mouse Icon -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+        <div class="w-6 h-10 border-2 border-text/20 rounded-full flex justify-center p-1.5">
+            <div class="w-1 h-2 bg-text/40 rounded-full animate-bounce"></div>
+        </div>
+    </div>
+
+    <!-- Right: Vertical Scroll Text -->
+    <div class="hidden md:flex absolute bottom-24 right-10 flex-col items-center gap-8">
+        <span class="text-[10px] font-bold tracking-[0.4em] uppercase vertical-text text-text-muted">Scroll Down</span>
+        <div class="w-px h-16 bg-text/20"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- ABOUT SECTION -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="about" class="py-28 md:py-36">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-10">
+        <!-- Section Title (Figma: centered, uppercase, underlined) -->
+        <div class="flex justify-center mb-16">
+            <h2 class="section-title">About Me</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-14 lg:gap-20 items-start">
+            <!-- Left: Bio -->
+            <div>
+                <h3 class="text-2xl md:text-3xl font-bold text-text mb-6 leading-snug">Get to know me!</h3>
+                <div class="space-y-5 text-text-muted text-[15px] leading-[1.8]">
+                    <p>
+                        I'm a <strong class="text-text font-semibold">Full Stack Developer</strong> building and managing digital experiences that blend logic with creativity. Specializing in modern web applications with clean code and intuitive user experiences.
+                    </p>
+                    <p>
+                        My journey in web development started with a curiosity to build things from scratch. Today, I specialize in crafting full-stack applications using modern web technologies, always striving to write clean, maintainable code.
+                    </p>
+                    <p>
+                        I'm open to <strong class="text-text font-semibold">Job</strong> opportunities where I can contribute, learn and grow. If you have a good opportunity that matches my skills then don't hesitate to <strong class="text-text font-semibold">contact</strong> me.
+                    </p>
+                </div>
+                <a href="#contact" class="btn btn-dark mt-8">Contact</a>
+            </div>
+
+            <!-- Right: Skills Grid (Figma: 3x3 icon grid) -->
+            <div>
+                <h3 class="text-xl font-bold text-text mb-6 uppercase tracking-wider">My Skills</h3>
+                <div class="grid grid-cols-3 gap-3" id="skills-grid">
+                    <!-- Skills will be populated by JS, fallback hardcoded -->
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-10 h-10" alt="HTML">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">HTML</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-10 h-10" alt="CSS">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">CSS</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-10 h-10" alt="JavaScript">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">JavaScript</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" class="w-10 h-10" alt="C++">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">C++</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" class="w-10 h-10" alt="C">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">C</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-10 h-10" alt="Python">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">Python</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" class="w-10 h-10" alt="Arduino">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">Arduino</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-10 h-10" alt="GitHub">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">GitHub</span>
+                    </div>
+                    <div class="skill-item">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" class="w-10 h-10" alt="Figma">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">Figma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PROJECTS SECTION -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="projects" class="py-28 md:py-36">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div class="flex justify-center mb-16">
+            <h2 class="section-title">Project</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+            <!-- Projects loaded dynamically by JS -->
+            <div class="col-span-full text-center py-16 text-text-muted" id="projects-loading">
+                <div class="inline-flex items-center gap-3">
+                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+                    <span class="font-medium">Loading projects...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Show More Button -->
+        <div class="mt-16 flex justify-center hidden" id="show-more-container">
+            <button class="btn btn-outline gap-3 group" id="show-more-btn">
+                Show More Projects
+                <i data-lucide="chevron-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CONTACT SECTION -->
+<!-- ═══════════════════════════════════════════ -->
+<section id="contact" class="py-28 md:py-36">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div class="flex justify-center mb-16">
+            <h2 class="section-title">Contact</h2>
+        </div>
+
+        <div class="max-w-2xl mx-auto card p-8 md:p-12">
+            <div class="text-center mb-10">
+                <h3 class="text-2xl font-bold text-text mb-2">Let's Work Together</h3>
+                <p class="text-text-muted text-sm">Fill out the form below and I'll get back to you as soon as possible.</p>
+            </div>
+
+            <form id="contact-form" class="space-y-5">
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-text uppercase tracking-wider">Name</label>
+                    <input type="text" name="name" required class="input" placeholder="Enter Your Name">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-text uppercase tracking-wider">Email</label>
+                    <input type="email" name="email" required class="input" placeholder="Enter Your Email">
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-text uppercase tracking-wider">Message</label>
+                    <textarea name="message" required rows="5" class="input resize-none" placeholder="Enter Your Message"></textarea>
+                </div>
+                <button type="submit" class="w-full btn btn-dark py-4 mt-2" id="contact-submit">
+                    Submit
+                </button>
+                <p id="contact-status" class="text-center text-sm font-medium hidden"></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ═══════════════════════════════════════════ -->
+<footer class="bg-text text-white pt-16 pb-8">
+    <div class="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
+            <!-- Left: Branding -->
+            <div class="max-w-sm">
+                <h2 class="text-2xl font-display font-bold text-white mb-4">Nanda</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    A passionate developer building digital experiences that blend logic with creativity. Specializing in modern web applications with clean code and intuitive user experiences.
+                </p>
+            </div>
+            <!-- Right: Social -->
+            <div>
+                <h3 class="text-sm font-bold uppercase tracking-widest text-white mb-5">Social</h3>
+                <div class="flex gap-3">
+                    <a href="https://github.com/Nanzzyy" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-text transition-all duration-200"><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                    <a href="https://tiktok.com/@nandaajaaa55" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-text transition-all duration-200"><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a8.15 8.15 0 0 1-1.87-1.42c-.01 3.65.01 7.3-.01 10.95-.1 3.32-2.58 6.43-5.83 7.15-3.23.72-6.84-.73-8.38-3.69-1.58-3.04-.61-7.14 2.23-9.06 1.4-.95 3.12-1.32 4.76-1.04v4.13c-1.3-.37-2.82-.12-3.83.74-.95.83-1.28 2.2-1.01 3.4.21 1.05.99 1.95 2.01 2.27 1.05.34 2.3.16 3.11-.6.76-.73 1.03-1.84.97-2.84l.01-15.01Z"/></svg></a>
+                    <a href="https://instagram.com/ananda.bgss" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-text transition-all duration-200"><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                    <a href="https://linkedin.com/in/nnda-bgss" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-text transition-all duration-200"><svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                </div>
+            </div>
+        </div>
+        <div class="pt-6 border-t border-white/15 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-2">
+            <p>&copy; Copyright 2025. Made by Nanda</p>
+            <p>Designed in Figma</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- SCRIPTS -->
+<!-- ═══════════════════════════════════════════ -->
+<script src="/js/app.js"></script>
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>

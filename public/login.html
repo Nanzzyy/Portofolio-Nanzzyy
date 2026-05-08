@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Admin</title>
+    <link href="/css/output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-bg text-text font-sans antialiased min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-md p-8 card mx-4">
+    <div class="text-center mb-10">
+        <div class="w-14 h-14 rounded-full bg-text text-white flex items-center justify-center font-display font-bold text-2xl mx-auto mb-5">N</div>
+        <h1 class="text-2xl font-black text-text font-display uppercase tracking-tight">Admin Login</h1>
+        <p class="text-text-muted text-sm mt-2">Sign in to manage your portfolio</p>
+    </div>
+
+    <div class="bg-red-50 border border-red-200 text-red-600 p-3 rounded-xl text-sm text-center font-semibold hidden" id="login-error"></div>
+
+    <form id="login-form" class="space-y-5 mt-6">
+        <div class="space-y-1.5">
+            <label class="text-xs font-bold text-text uppercase tracking-wider">Username</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i data-lucide="user" class="w-4 h-4 text-text-muted/60"></i>
+                </div>
+                <input type="text" name="username" required class="input pl-11" placeholder="Enter username">
+            </div>
+        </div>
+        <div class="space-y-1.5">
+            <label class="text-xs font-bold text-text uppercase tracking-wider">Password</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i data-lucide="lock" class="w-4 h-4 text-text-muted/60"></i>
+                </div>
+                <input type="password" name="password" required class="input pl-11" placeholder="Enter password">
+            </div>
+        </div>
+        <button type="submit" class="w-full btn btn-dark py-3.5 mt-2">
+            Sign In
+        </button>
+    </form>
+    <div class="mt-8 text-center border-t border-border pt-6">
+        <a href="/" class="text-sm font-semibold text-text-muted hover:text-text transition-colors inline-flex items-center gap-2">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Portfolio
+        </a>
+    </div>
+</div>
+
+<script>
+    lucide.createIcons();
+
+    const ADMIN_USER = 'admin';
+    const ADMIN_PASS = 'admin123';
+
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const username = form.username.value;
+        const password = form.password.value;
+
+        if (username === ADMIN_USER && password === ADMIN_PASS) {
+            sessionStorage.setItem('admin_auth', 'true');
+            window.location.href = '/admin.html';
+        } else {
+            const err = document.getElementById('login-error');
+            err.textContent = 'Invalid credentials. Try admin / admin123';
+            err.classList.remove('hidden');
+        }
+    });
+</script>
+</body>
+</html>
