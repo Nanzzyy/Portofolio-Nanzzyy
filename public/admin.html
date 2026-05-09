@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-[#F9F9F9] text-text font-sans antialiased min-h-screen">
+<body class="text-text font-sans antialiased min-h-screen">
 
 <!-- Topbar -->
 <nav class="bg-card border-b border-border sticky top-0 z-50">
@@ -29,70 +29,174 @@
     </div>
 </nav>
 
-<main class="max-w-[1200px] mx-auto px-6 md:px-10 py-10 grid lg:grid-cols-5 gap-8">
-    
-    <!-- ══ ADD PROJECT FORM ══ -->
-    <div class="lg:col-span-2">
-        <div class="card p-6 md:p-8 sticky top-24">
-            <div class="flex items-center gap-3 mb-8 border-b border-border pb-4">
-                <div class="w-8 h-8 rounded-lg bg-text text-white flex items-center justify-center">
-                    <i data-lucide="plus" class="w-4 h-4"></i>
+<main class="max-w-[1200px] mx-auto px-6 md:px-10 py-10">
+    <!-- Tab Navigation -->
+    <div class="flex flex-wrap gap-2 mb-10 border-b border-border pb-6">
+        <button onclick="showTab('projects')" class="tab-btn active" id="tab-projects-btn">
+            <i data-lucide="folder-kanban" class="w-4 h-4"></i> Projects
+        </button>
+        <button onclick="showTab('skills')" class="tab-btn" id="tab-skills-btn">
+            <i data-lucide="zap" class="w-4 h-4"></i> Skills
+        </button>
+        <button onclick="showTab('profile')" class="tab-btn" id="tab-profile-btn">
+            <i data-lucide="user-cog" class="w-4 h-4"></i> Profile & PFP
+        </button>
+        <button onclick="showTab('messages')" class="tab-btn" id="tab-messages-btn">
+            <i data-lucide="mail" class="w-4 h-4"></i> Messages
+        </button>
+    </div>
+
+    <!-- ══ PROJECTS TAB ══ -->
+    <div id="tab-projects" class="tab-content grid lg:grid-cols-5 gap-8">
+        <!-- Add Project Form -->
+        <div class="lg:col-span-2">
+            <div class="card p-6 md:p-8 sticky top-24">
+                <div class="flex items-center gap-3 mb-8 border-b border-border pb-4">
+                    <div class="w-8 h-8 rounded-lg bg-text text-white flex items-center justify-center" id="form-icon">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </div>
+                    <h2 class="text-lg font-bold text-text" id="form-title">Add New Project</h2>
+                    <button onclick="resetProjectForm()" class="hidden ml-auto text-xs font-bold text-red-500 hover:underline" id="cancel-edit-btn">Cancel</button>
                 </div>
-                <h2 class="text-lg font-bold text-text">Add New Project</h2>
+
+                <form id="add-project-form" class="space-y-5">
+                    <input type="hidden" name="id" id="project-id">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Project Title</label>
+                        <input type="text" name="title" required class="input" placeholder="E.g. E-Commerce Website">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Description</label>
+                        <textarea name="description" required rows="4" class="input resize-none" placeholder="Brief description..."></textarea>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Tech Stack</label>
+                        <input type="text" name="language" required class="input" placeholder="E.g. HTML, CSS, JS">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Image URL</label>
+                        <input type="url" name="preview_url" class="input" placeholder="https://...">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Live URL</label>
+                        <input type="url" name="website_url" class="input" placeholder="https://...">
+                    </div>
+                    <button type="submit" class="w-full btn btn-dark py-3.5 mt-4" id="save-btn">
+                        <i data-lucide="save" class="w-4 h-4"></i> Save Project
+                    </button>
+                    <p id="form-status" class="text-center text-sm font-medium hidden"></p>
+                </form>
             </div>
+        </div>
 
-            <form id="add-project-form" class="space-y-5">
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold text-text uppercase tracking-wider">Project Title</label>
-                    <input type="text" name="title" required class="input" placeholder="E.g. E-Commerce Website">
-                </div>
-                
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold text-text uppercase tracking-wider">Description</label>
-                    <textarea name="description" required rows="4" class="input resize-none" placeholder="Brief description of the project..."></textarea>
-                </div>
+        <!-- Project List -->
+        <div class="lg:col-span-3 space-y-6">
+            <div class="flex items-center justify-between pb-4 border-b border-border">
+                <h2 class="text-xl font-bold text-text">Projects</h2>
+                <span class="px-3 py-1.5 rounded-full bg-card border border-border text-xs font-bold text-text" id="project-count">Total: 0</span>
+            </div>
+            <div id="admin-projects" class="space-y-4"></div>
+        </div>
+    </div>
 
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold text-text uppercase tracking-wider">Tech Stack</label>
-                    <input type="text" name="language" required class="input" placeholder="E.g. HTML, CSS, JavaScript, Node.js">
-                    <p class="text-[10px] text-text-muted font-medium mt-1">Separate multiple technologies with commas</p>
-                </div>
+    <!-- ══ SKILLS TAB ══ -->
+    <div id="tab-skills" class="tab-content hidden grid lg:grid-cols-5 gap-8">
+        <div class="lg:col-span-2">
+            <div class="card p-6 md:p-8 sticky top-24">
+                <h2 class="text-lg font-bold text-text mb-6" id="skill-form-title">Add New Skill</h2>
+                <form id="skill-form" class="space-y-5">
+                    <input type="hidden" name="id" id="skill-id">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Skill Name</label>
+                        <input type="text" name="name" required class="input" placeholder="E.g. React">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Icon URL (SVG or PNG)</label>
+                        <input type="url" name="icon_url" required class="input" placeholder="https://...">
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="submit" class="flex-1 btn btn-dark py-3.5" id="skill-save-btn">Save Skill</button>
+                        <button type="button" onclick="resetSkillForm()" class="hidden px-4 py-3.5 rounded-full border border-border text-xs font-bold hover:bg-gray-50" id="skill-cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="lg:col-span-3 space-y-6">
+            <h2 class="text-xl font-bold text-text border-b border-border pb-4">All Skills</h2>
+            <div id="admin-skills" class="grid grid-cols-2 sm:grid-cols-3 gap-4"></div>
+        </div>
+    </div>
 
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold text-text uppercase tracking-wider">Preview Image URL</label>
-                    <input type="url" name="preview_url" class="input" placeholder="https://example.com/preview.jpg">
+    <!-- ══ PROFILE TAB ══ -->
+    <div id="tab-profile" class="tab-content hidden max-w-2xl mx-auto">
+        <div class="card p-8 md:p-10">
+            <h2 class="text-2xl font-bold text-text mb-8">Edit Profile Information</h2>
+            <form id="profile-form" class="space-y-6">
+                <div class="flex items-center gap-6 mb-8 p-6 bg-[#F9F9F9] rounded-2xl border border-border">
+                    <div class="relative group">
+                        <img id="profile-preview" src="/images/placeholder.jpg" class="w-24 h-24 rounded-full object-cover border-4 border-white shadow-md">
+                    </div>
+                    <div class="flex-1">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Navbar / Hero Profile Picture (URL)</label>
+                        <input type="url" name="avatar_url" id="avatar_url_input" class="input mt-2" placeholder="https://...">
+                    </div>
                 </div>
-
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold text-text uppercase tracking-wider">Live Website URL</label>
-                    <input type="url" name="website_url" class="input" placeholder="https://myproject.com">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Full Name</label>
+                        <input type="text" name="name" required class="input" placeholder="Your Name">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-text uppercase tracking-wider">Job Title</label>
+                        <input type="text" name="title" required class="input" placeholder="E.g. Full Stack Developer">
+                    </div>
                 </div>
-
-                <button type="submit" class="w-full btn btn-dark py-3.5 mt-4" id="save-btn">
-                    <i data-lucide="save" class="w-4 h-4"></i> Save Project
-                </button>
-                <p id="form-status" class="text-center text-sm font-medium hidden"></p>
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-text uppercase tracking-wider">Hero / Footer Short Bio</label>
+                    <textarea name="bio" required rows="3" class="input resize-none" placeholder="Short intro..."></textarea>
+                </div>
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-text uppercase tracking-wider">Full About Me Description</label>
+                    <textarea name="about_text" required rows="6" class="input resize-none" placeholder="Detailed bio for About section..."></textarea>
+                    <p class="text-[10px] text-text-muted mt-1">This appears in the 'About Me' section of your portfolio.</p>
+                </div>
+                <button type="submit" class="w-full btn btn-dark py-4 mt-4" id="profile-save-btn">Update Profile</button>
+                <p id="profile-status" class="text-center text-sm font-medium hidden"></p>
             </form>
         </div>
     </div>
 
-    <!-- ══ PROJECT LIST ══ -->
-    <div class="lg:col-span-3 space-y-6">
-        <div class="flex items-center justify-between pb-4 border-b border-border">
-            <h2 class="text-xl font-bold text-text">Projects</h2>
-            <span class="px-3 py-1.5 rounded-full bg-card border border-border text-xs font-bold text-text" id="project-count">Total: 0</span>
-        </div>
-
-        <div id="admin-projects" class="space-y-4 mt-4">
-            <div class="text-center py-16 text-text-muted" id="admin-loading">
-                <div class="inline-flex items-center gap-3">
-                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
-                    <span class="font-medium">Loading projects...</span>
-                </div>
-            </div>
-        </div>
+    <!-- ══ MESSAGES TAB ══ -->
+    <div id="tab-messages" class="tab-content hidden space-y-6">
+        <h2 class="text-xl font-bold text-text border-b border-border pb-4">Contact Messages</h2>
+        <div id="admin-messages" class="space-y-4"></div>
     </div>
 </main>
+
+<style>
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    transition-property: all;
+    border: 1px solid transparent;
+}
+.tab-btn:not(.active) {
+    color: #6B7280;
+}
+.tab-btn:not(.active):hover {
+    background-color: #f3f4f6;
+}
+.tab-btn.active {
+    background-color: #1A1A1A;
+    color: white;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+</style>
 
 <script src="/js/admin.js"></script>
 <script>lucide.createIcons();</script>

@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
+    "build": "npm run build:css",
     "dev": "npm run build:css && concurrently \"nodemon server.js\" \"npm run watch:css\"",
     "build:css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css",
     "watch:css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"

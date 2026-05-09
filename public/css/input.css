@@ -23,7 +23,9 @@ nav.scrolled {
 html { scroll-behavior: smooth; }
 
 body {
-  @apply bg-bg text-text font-sans antialiased leading-relaxed;
+  @apply text-text font-sans antialiased leading-relaxed min-h-screen;
+  background: linear-gradient(135deg, #999999 0%, #FFFFFF 50%, #999999 100%);
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {

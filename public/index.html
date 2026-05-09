@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-bg text-text font-sans antialiased overflow-x-hidden selection:bg-text selection:text-white">
+<body class="text-text font-sans antialiased overflow-x-hidden selection:bg-text selection:text-white">
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- NAVBAR -->
@@ -20,8 +20,11 @@
 <nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
     <div class="max-w-[1200px] mx-auto px-6 md:px-10 h-24 flex items-center justify-between">
         <a href="#home" class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-text text-white flex items-center justify-center font-display font-bold text-sm">N</div>
-            <span class="font-display font-bold text-xl text-text tracking-tight">Nanda</span>
+            <div id="navbar-pfp-container" class="w-10 h-10 rounded-full bg-text text-white flex items-center justify-center font-display font-bold text-sm overflow-hidden border border-border">
+                <span id="navbar-initial">N</span>
+                <img id="navbar-pfp" src="" class="hidden w-full h-full object-cover">
+            </div>
+            <span class="font-display font-bold text-xl text-text tracking-tight" id="navbar-name">Nanda</span>
         </a>
         <div class="hidden md:flex items-center gap-12">
             <a href="#home" class="text-[11px] font-bold tracking-[0.2em] uppercase text-text hover:text-text-muted transition-colors">Home</a>
@@ -46,10 +49,6 @@
 <!-- HERO SECTION -->
 <!-- ═══════════════════════════════════════════ -->
 <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Radial glow background (Silver centered) -->
-    <div class="absolute inset-0 -z-10 pointer-events-none flex items-center justify-center">
-        <div class="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] bg-[radial-gradient(circle,rgba(220,220,220,0.4)_0%,rgba(243,243,243,0)_70%)] rounded-full"></div>
-    </div>
 
     <!-- Left Sidebar: Social Icons (Simple line) -->
     <aside class="hidden md:flex fixed left-10 top-1/2 -translate-y-1/2 flex-col items-center gap-6 z-40">
@@ -63,10 +62,10 @@
 
     <!-- Hero Content (Centered) -->
     <div class="max-w-[1200px] mx-auto px-6 md:px-10 text-center z-10">
-        <h1 class="text-[clamp(3.5rem,10vw,8rem)] font-black leading-[1.1] text-text mb-6 animate-fade-in-up tracking-tighter">
+        <h1 class="text-[clamp(3.5rem,10vw,8rem)] font-black leading-[1.1] text-text mb-6 animate-fade-in-up tracking-tighter" id="hero-title">
             Hey, I'm Nanda
         </h1>
-        <p class="text-base md:text-xl text-text-muted max-w-xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.1s;">
+        <p class="text-base md:text-xl text-text-muted max-w-xl mx-auto leading-relaxed animate-fade-in-up whitespace-pre-line" style="animation-delay: 0.1s;" id="hero-bio">
             Crafting code with purpose. Designing dreams into reality.<br class="hidden md:block"> Welcome to the space where creativity meets precision.
         </p>
     </div>
@@ -100,7 +99,7 @@
             <!-- Left: Bio -->
             <div>
                 <h3 class="text-2xl md:text-3xl font-bold text-text mb-6 leading-snug">Get to know me!</h3>
-                <div class="space-y-5 text-text-muted text-[15px] leading-[1.8]">
+                <div class="space-y-5 text-text-muted text-[15px] leading-[1.8] whitespace-pre-line" id="about-bio">
                     <p>
                         I'm a <strong class="text-text font-semibold">Full Stack Developer</strong> building and managing digital experiences that blend logic with creativity. Specializing in modern web applications with clean code and intuitive user experiences.
                     </p>
@@ -119,42 +118,6 @@
                 <h3 class="text-xl font-bold text-text mb-6 uppercase tracking-wider">My Skills</h3>
                 <div class="grid grid-cols-3 gap-3" id="skills-grid">
                     <!-- Skills will be populated by JS, fallback hardcoded -->
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="w-10 h-10" alt="HTML">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">HTML</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="w-10 h-10" alt="CSS">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">CSS</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-10 h-10" alt="JavaScript">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">JavaScript</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" class="w-10 h-10" alt="C++">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">C++</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" class="w-10 h-10" alt="C">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">C</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-10 h-10" alt="Python">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">Python</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" class="w-10 h-10" alt="Arduino">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">Arduino</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-10 h-10" alt="GitHub">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">GitHub</span>
-                    </div>
-                    <div class="skill-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" class="w-10 h-10" alt="Figma">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-text-muted">Figma</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -235,8 +198,8 @@
         <div class="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
             <!-- Left: Branding -->
             <div class="max-w-sm">
-                <h2 class="text-2xl font-display font-bold text-white mb-4">Nanda</h2>
-                <p class="text-gray-400 text-sm leading-relaxed">
+                <h2 class="text-2xl font-display font-bold text-white mb-4" id="footer-name">Nanda</h2>
+                <p class="text-gray-400 text-sm leading-relaxed whitespace-pre-line" id="footer-bio">
                     A passionate developer building digital experiences that blend logic with creativity. Specializing in modern web applications with clean code and intuitive user experiences.
                 </p>
             </div>

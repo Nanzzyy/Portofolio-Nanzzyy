@@ -98,20 +98,20 @@ ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
 
 -- Public read access for portfolio display
 CREATE POLICY "Public read profiles" ON profiles FOR SELECT USING (true);
-CREATE POLICY "Public read published projects" ON projects FOR SELECT USING (true);
+CREATE POLICY "Public read published projects" ON projects FOR SELECT USING (status = 'published');
 CREATE POLICY "Public read skills" ON skills FOR SELECT USING (true);
 CREATE POLICY "Public read experiences" ON experiences FOR SELECT USING (true);
 
 -- Allow insert for contact messages from anyone
 CREATE POLICY "Public insert messages" ON messages FOR INSERT WITH CHECK (true);
 
--- Allow all operations for authenticated users (admin)
--- For the simple auth approach, we use anon key with permissive policies
-CREATE POLICY "Allow all profiles" ON profiles FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all projects" ON projects FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all skills" ON skills FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all experiences" ON experiences FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Allow all messages" ON messages FOR ALL USING (true) WITH CHECK (true);
+-- ONLY authenticated users (Admin) can do everything else
+-- This ensures that only you, after logging in through Supabase Auth, can edit your portfolio.
+CREATE POLICY "Admin full access profiles" ON profiles FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Admin full access projects" ON projects FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Admin full access skills" ON skills FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Admin full access experiences" ON experiences FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "Admin full access messages" ON messages FOR ALL TO authenticated USING (true) WITH CHECK (true);
 
 -- ==================
 -- Insert default profile
